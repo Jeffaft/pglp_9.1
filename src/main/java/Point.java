@@ -10,7 +10,7 @@ public class Point {
 	
 	@Override
 	public String toString() {
-		return "(" + x + "," + ")";
+		return "(" + x + "," +y+")";
 	}
 	public int getX() {
 		return this.x;

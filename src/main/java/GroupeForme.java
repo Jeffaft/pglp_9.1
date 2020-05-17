@@ -15,13 +15,13 @@ public class GroupeForme implements Forme {
 	}
 	
 	public String toString() {
-		String str = "Nom (";
+		String str = nom+ " (\n\n\t";
 		Iterator<Forme> itr = listForme.iterator();
 		while (itr.hasNext()) {
-			str += itr.next().toString() +", "; 
+			str += itr.next().toString() +"\n\t"; 
 		}
 		
-		str += ")";
+		str += "\n)";
 		return str;
 	}
 	public String getNom() {
