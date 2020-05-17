@@ -11,6 +11,11 @@ public class Rectangle implements Forme {
 		this.hauteur = h;
 		this.longueur = l;
 	}
+	
+	public String toString () {
+		return  "Rectangle (" + nom + ", " + bas_gauche.toString() + ", "
+						+ hauteur +", "+longueur+")";
+	}
 	public String getNom() {
 		return nom;
 	}

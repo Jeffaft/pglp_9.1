@@ -9,7 +9,11 @@ public class Cercle implements Forme {
 		this.centre = p;
 		this.rayon = r;
 	}
-
+	
+	@Override
+	public String toString () {
+		return "Cercle ("+nom+", "+centre.toString()+", "+rayon+")";
+	}
 	public String getNom() {
 		return nom;
 	}

@@ -10,6 +10,11 @@ public class Carre implements Forme {
 		this.longueur = l;
 	}
 	
+	@Override
+	public String toString() {
+		return "Carre (" + nom + ", " + bas_gauche.toString() +", "
+					+ longueur + ")";
+	}
 	public Point getBas_gauche() {
 		return this.bas_gauche;
 	}

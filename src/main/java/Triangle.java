@@ -11,7 +11,11 @@ public class Triangle implements Forme {
 		B = b;
 		C = c;
 	}
-
+	
+	public String toString() {
+		return "Triangle ("+nom+", "+A.toString()+", "+B.toString()
+				+", "+C.toString()+")";
+	}
 	public String getNom() {
 		return nom;
 	}

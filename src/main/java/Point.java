@@ -8,6 +8,10 @@ public class Point {
 		this.y = y;
 	}
 	
+	@Override
+	public String toString() {
+		return "(" + x + "," + ")";
+	}
 	public int getX() {
 		return this.x;
 	}
