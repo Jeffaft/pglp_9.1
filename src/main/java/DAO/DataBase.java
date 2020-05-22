@@ -5,20 +5,20 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 public abstract class DataBase {
 	
-	public static Connection connect() {
+	public static Connection connect(String dbName) {
 		Connection conn = null;
 		try {
-			conn = DriverManager.getConnection("jdbc:derby:DessinBDD;create=true");
+			conn = DriverManager.getConnection("jdbc:derby:"+dbName+";create=true");
 		}  catch (SQLException e) {
             e.printStackTrace();
         }
 		
 		return conn;
 	}
-	public static void  create() {
+	public static void  create(String dbName) {
 		Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:derby:DessinBDD;create=true");
+            conn = DriverManager.getConnection("jdbc:derby:"+dbName+";create=true");
             String Carre = "CREATE TABLE Carre("
             		+ "Nom varchar(30),"
                     + "x int,"
@@ -55,7 +55,7 @@ public abstract class DataBase {
             String allForme = "CREATE TABLE allForme("
                     + "NomForme varchar(30),"
                     + "type varchar(30),"
-                    + "PRIMARY KEY(NomForme)"
+                    + "PRIMARY KEY(NomForme,type)"
                     + ")";
             String Groupe = "CREATE TABLE groupe("
                     + "NomGroupe varchar(30),"
@@ -107,10 +107,10 @@ public abstract class DataBase {
         }
     }
 	
-	public static void reset() {
+	public static void reset(String dbName) {
 		Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:derby:DessinBDD;create=true");
+            conn = DriverManager.getConnection("jdbc:derby:"+dbName+";create=true");
             try {
                 Statement stmt = conn.createStatement();
                 stmt.execute("DROP TABLE Carre");

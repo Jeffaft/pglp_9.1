@@ -4,7 +4,11 @@ public class Carre implements Forme {
 	private String nom;
 	private Point bas_gauche;
 	private int longueur;
-	
+	public Carre(Carre c) {
+		this.nom = c.nom;
+		this.bas_gauche = c.bas_gauche;
+		this.longueur = c.longueur;
+	}
 	public Carre (String nom, Point bg, int l) {
 		this.nom = nom;
 		this.bas_gauche = bg;
@@ -22,5 +26,9 @@ public class Carre implements Forme {
 	
 	public int getL() {
 		return this.longueur;
+	}
+	
+	public String getNom() {
+		return this.nom;
 	}
 }

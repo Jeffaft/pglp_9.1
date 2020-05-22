@@ -1,16 +1,19 @@
 package DAO;
 import Forme.*;
-public class FabriqueDAO {
-	public static DAO<Carre> getCarreDAO(){
-		return new CarreDAO();
+public class FabriqueDAO {	
+	public static DAO<Carre> getCarreDAO(String dbName){
+		return new CarreDAO(dbName);
 	}
-	public static DAO<Rectangle> getRectangleDAO(){
-		return new RectangleDAO();
+	public static DAO<Rectangle> getRectangleDAO(String dbName){
+		return new RectangleDAO(dbName);
 	}
-	public static DAO<Cercle> getCercleDAO(){
-		return new CercleDAO();
+	public static DAO<Cercle> getCercleDAO(String dbName){
+		return new CercleDAO(dbName);
 	}
-	public static DAO<Triangle> getTriangleDAO(){
-		return new TriangleDAO();
+	public static DAO<Triangle> getTriangleDAO(String dbName){
+		return new TriangleDAO(dbName);
+	}
+	public static DAO<GroupeForme> getGroupeFormeDAO(String dbName){
+		return new GroupeFormeDAO(dbName);
 	}
 }
