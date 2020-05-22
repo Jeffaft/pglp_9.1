@@ -1,6 +1,13 @@
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import Forme.Carre;
+import Forme.Cercle;
+import Forme.GroupeForme;
+import Forme.Point;
+import Forme.Rectangle;
+import Forme.Triangle;
+
 public class FormeTest {
 	@Test
 	public void CarreTest() {

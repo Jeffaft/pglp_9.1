@@ -1,3 +1,4 @@
+package Forme;
 
 public class Point {
 	private int x;

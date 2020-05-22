@@ -5,6 +5,16 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 public abstract class DataBase {
 	
+	public static Connection connect() {
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection("jdbc:derby:DessinBDD;create=true");
+		}  catch (SQLException e) {
+            e.printStackTrace();
+        }
+		
+		return conn;
+	}
 	public static void  create() {
 		Connection conn = null;
         try {

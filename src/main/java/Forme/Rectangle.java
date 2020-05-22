@@ -1,4 +1,4 @@
-
+package Forme;
 public class Rectangle implements Forme {
 	private String nom;
 	private int hauteur;

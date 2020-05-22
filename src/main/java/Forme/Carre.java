@@ -1,3 +1,4 @@
+package Forme;
 
 public class Carre implements Forme {
 	private String nom;

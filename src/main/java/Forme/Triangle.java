@@ -1,4 +1,4 @@
-
+package Forme;
 public class Triangle implements Forme {
 	private String nom;
 	private Point A;

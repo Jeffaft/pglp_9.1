@@ -1,3 +1,4 @@
+package Forme;
 
 public class Cercle implements Forme {
 	private String nom;
