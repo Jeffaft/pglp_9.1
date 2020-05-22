@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 public abstract class DataBase {
 	
-	public void create() {
+	public static void  create() {
 		Connection conn = null;
         try {
             conn = DriverManager.getConnection("jdbc:derby:DessinBDD;create=true");
@@ -25,64 +25,69 @@ public abstract class DataBase {
                     + "PRIMARY KEY(Nom)"
                     + ")";
             String Cercle = "CREATE TABLE Cercle("
-            + "Nom varchar(30),"
-            + "x int,"
-            + "y int,"
-            + "rayon int,"
-            + "PRIMARY KEY(Nom)"
-            + ")";
+		            + "Nom varchar(30),"
+		            + "x int,"
+		            + "y int,"
+		            + "rayon int,"
+		            + "PRIMARY KEY(Nom)"
+		            + ")";
             
             String Triangle = "CREATE TABLE Triangle("
-            + "Nom varchar(30),"
-            + "Ax int,"
-            + "Ay int,"
-            + "Bx int,"
-            + "By int,"
-            + "Cx int,"
-            + "Cy int,"
-            + "PRIMARY KEY(Nom)"
-            + ")";
-            String Groupe = "CREATE TABLE groupe("
-                    + "Nomgroupe varchar(30),"
-            		+ "NomForme varchar(30), "
-                    + "PRIMARY KEY(NomGroupe,NomForme),"
-                    + "FOREIGN KEY(NomForme) REFERENCES allForme(NomForme)"
-                    + ")";
+		            + "Nom varchar(30),"
+		            + "xA int,"
+		            + "yA int,"
+		            + "xB int,"
+		            + "yB int,"
+		            + "xC int,"
+		            + "yC int,"
+		            + "PRIMARY KEY(Nom)"
+		            + ")";
             String allForme = "CREATE TABLE allForme("
                     + "NomForme varchar(30),"
                     + "type varchar(30),"
-                    + "PRIMARY KEY(NomGroupe)"
-
+                    + "PRIMARY KEY(NomForme)"
                     + ")";
+            String Groupe = "CREATE TABLE groupe("
+                    + "NomGroupe varchar(30),"
+            		+ "NomForme varchar(30), "
+                    + "PRIMARY KEY(NomGroupe,NomForme),"
+                    + "FOREIGN KEY(NomForme) REFERENCES allForme(NomForme)"
+                    + ")";   
             Statement stmt = conn.createStatement();
 
             try {
                 stmt.execute(Carre);
+                System.out.println("table Carre created");
             } catch (SQLException e) {
                 e.printStackTrace();
                 }
             try {
                 stmt.execute(Rectangle);
+                System.out.println("table Rectangle created");
             } catch (SQLException e) {
                 e.printStackTrace();
                 }
             try {
                 stmt.execute(Cercle);
+                System.out.println("table Cercle created");
             } catch (SQLException e) {
                 e.printStackTrace();
                 }
             try {
                 stmt.execute(Triangle);
-            } catch (SQLException e) {
-                e.printStackTrace();
-                }
-            try {
-                stmt.execute(Groupe);
+                System.out.println("table Triangle created");
             } catch (SQLException e) {
                 e.printStackTrace();
                 }
             try {
                 stmt.execute(allForme);
+                System.out.println("table allForme created");
+            } catch (SQLException e) {
+                e.printStackTrace();
+                }
+            try {
+                stmt.execute(Groupe);
+                System.out.println("table Groupe created");
             } catch (SQLException e) {
                 e.printStackTrace();
                 }
@@ -91,6 +96,41 @@ public abstract class DataBase {
             e.printStackTrace();
         }
     }
+	
+	public static void reset() {
+		Connection conn = null;
+        try {
+            conn = DriverManager.getConnection("jdbc:derby:DessinBDD;create=true");
+            try {
+                Statement stmt = conn.createStatement();
+                stmt.execute("DROP TABLE Carre");
+                System.out.println("table Carre deleted");
+                stmt.execute("DROP TABLE Rectangle");
+                System.out.println("table Rectangle deleted");
+                stmt.execute("DROP TABLE Cercle");
+                System.out.println("table Cercle deleted");
+                stmt.execute("DROP TABLE Triangle");
+                System.out.println("table Triangle deleted");
+                stmt.execute("DROP TABLE Groupe");
+                System.out.println("table Groupe deleted");
+                stmt.execute("DROP TABLE allForme");
+                System.out.println("table allForme deleted");
+                
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (conn != null) {
+                try {
+                    System.out.println("close");
+                    conn.close();
+                } catch (SQLException e) { }
+            }
+        }
 	}
+}
 
 
