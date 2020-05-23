@@ -47,7 +47,7 @@ public class CarreDAO extends DAO<Carre> {
 				sql.setInt(4,c.getL());
 				sql.executeUpdate();
 				sql = this.conn.prepareStatement("INSERT INTO allForme(NomForme,type)"
-						+ " VALUES(?,carre)");
+						+ " VALUES(?,'carre')");
 				sql.setString(1,c.getNom());
 				sql.executeUpdate();
 			}
@@ -72,6 +72,9 @@ public class CarreDAO extends DAO<Carre> {
 			}
 			else {
 				sql = this.conn.prepareStatement("DELETE FROM Carre WHERE nom = ?");
+				sql.setString(1,nom);
+				sql.executeUpdate();
+				sql = this.conn.prepareStatement("DELETE FROM allForme WHERE nomForme = ?");
 				sql.setString(1,nom);
 				sql.executeUpdate();
 			}

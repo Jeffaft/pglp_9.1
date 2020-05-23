@@ -49,7 +49,7 @@ public class CercleDAO extends DAO<Cercle>{
 				sql.setInt(4,c.getRayon());
 				sql.executeUpdate();
 				sql = this.conn.prepareStatement("INSERT INTO allForme(NomForme,type)"
-						+ " VALUES(?,cercle)");
+						+ " VALUES(?,'cercle')");
 				sql.setString(1,c.getNom());
 				sql.executeUpdate();
 			}
@@ -74,6 +74,9 @@ public class CercleDAO extends DAO<Cercle>{
 			}
 			else {
 				sql = this.conn.prepareStatement("DELETE FROM Cercle WHERE nom = ?");
+				sql.setString(1,nom);
+				sql.executeUpdate();
+				sql = this.conn.prepareStatement("DELETE FROM allForme WHERE nomForme = ?");
 				sql.setString(1,nom);
 				sql.executeUpdate();
 			}

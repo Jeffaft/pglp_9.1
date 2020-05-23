@@ -49,7 +49,7 @@ public class RectangleDAO extends DAO<Rectangle> {
 				sql.setInt(5,r.getLongueur());
 				sql.executeUpdate();
 				sql = this.conn.prepareStatement("INSERT INTO allForme(NomForme,type)"
-						+ " VALUES(?,rectangle)");
+						+ " VALUES(?,'rectangle')");
 				sql.setString(1,r.getNom());
 				sql.executeUpdate();
 			}
@@ -74,6 +74,9 @@ public class RectangleDAO extends DAO<Rectangle> {
 			}
 			else {
 				sql = this.conn.prepareStatement("DELETE FROM Rectangle WHERE nom = ?");
+				sql.setString(1,nom);
+				sql.executeUpdate();
+				sql = this.conn.prepareStatement("DELETE FROM allForme WHERE nomForme = ?");
 				sql.setString(1,nom);
 				sql.executeUpdate();
 			}

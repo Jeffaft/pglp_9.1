@@ -2,6 +2,8 @@ package DAO;
 import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 public abstract class DataBase {
 	
@@ -54,14 +56,13 @@ public abstract class DataBase {
 		            + ")";
             String allForme = "CREATE TABLE allForme("
                     + "NomForme varchar(30),"
-                    + "type varchar(30),"
-                    + "PRIMARY KEY(NomForme,type)"
+                    + "type varchar(30)"
                     + ")";
             String Groupe = "CREATE TABLE groupe("
                     + "NomGroupe varchar(30),"
             		+ "NomForme varchar(30), "
-                    + "PRIMARY KEY(NomGroupe,NomForme),"
-                    + "FOREIGN KEY(NomForme) REFERENCES allForme(NomForme)"
+                    + "ordreF int,"
+                    + "PRIMARY KEY(NomGroupe,NomForme)"
                     + ")";   
             Statement stmt = conn.createStatement();
 
@@ -111,25 +112,44 @@ public abstract class DataBase {
 		Connection conn = null;
         try {
             conn = DriverManager.getConnection("jdbc:derby:"+dbName+";create=true");
+            Statement stmt = conn.createStatement();
             try {
-                Statement stmt = conn.createStatement();
-                stmt.execute("DROP TABLE Carre");
-                System.out.println("table Carre deleted");
-                stmt.execute("DROP TABLE Rectangle");
-                System.out.println("table Rectangle deleted");
-                stmt.execute("DROP TABLE Cercle");
-                System.out.println("table Cercle deleted");
-                stmt.execute("DROP TABLE Triangle");
-                System.out.println("table Triangle deleted");
-                stmt.execute("DROP TABLE Groupe");
-                System.out.println("table Groupe deleted");
-                stmt.execute("DROP TABLE allForme");
-                System.out.println("table allForme deleted");
                 
-
+                stmt.execute("DROP TABLE Carre");
+                System.out.println("table Carre deleted");                                                                                       
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+            try {
+            	stmt.execute("DROP TABLE Rectangle");
+                System.out.println("table Rectangle deleted");
+            } catch (SQLException e) {
+                e.printStackTrace();
+                }
+            try {
+            	stmt.execute("DROP TABLE Cercle");
+                System.out.println("table Cercle deleted");
+            } catch (SQLException e) {
+                e.printStackTrace();
+                }
+            try {
+            	stmt.execute("DROP TABLE Triangle");
+                System.out.println("table Triangle deleted");
+            } catch (SQLException e) {
+                e.printStackTrace();
+                }
+            try {
+            	stmt.execute("DROP TABLE Groupe");
+                System.out.println("table Groupe deleted");
+            } catch (SQLException e) {
+                e.printStackTrace();
+                }
+            try {
+            	stmt.execute("DROP TABLE allForme");
+                System.out.println("table allForme deleted");
+            } catch (SQLException e) {
+                e.printStackTrace();
+                }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -140,6 +160,28 @@ public abstract class DataBase {
                 } catch (SQLException e) { }
             }
         }
+	}
+	
+	public static String afficheTable(String tablename,String dbName) {
+		Connection conn = DataBase.connect(dbName);
+		String str = "";
+		try {
+			PreparedStatement sql = conn.prepareStatement("SELECT * FROM "+ tablename);
+			sql.execute();
+			
+			ResultSet results = sql.getResultSet();
+			str += "===============================\n";
+			str+= "Table : "+ tablename +"\n";
+			while(results.next()) {
+				str += results.getObject(1) +" "+results.getObject(2) +"\n";
+			}
+			str += "===============================\n";
+			conn.close();
+		} catch (Exception e) 
+		{ 
+			e.printStackTrace();
+		}
+		return str;
 	}
 }
 

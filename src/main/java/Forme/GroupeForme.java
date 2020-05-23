@@ -29,8 +29,8 @@ public class GroupeForme implements Forme {
 		return nom;
 	}
 
-	public ArrayList<Forme> getListForme() {
-		return listForme;
+	public Iterator<Forme> getListIteraror() {
+		return listForme.iterator();
 	}
 	
 }

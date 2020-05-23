@@ -52,7 +52,7 @@ public class TriangleDAO extends DAO<Triangle> {
 				sql.setInt(7,t.getC().getY());
 				sql.executeUpdate();
 				sql = this.conn.prepareStatement("INSERT INTO allForme(NomForme,type)"
-						+ " VALUES(?,triangle)");
+						+ " VALUES(?,'triangle')");
 				sql.setString(1,t.getNom());
 				sql.executeUpdate();
 			}
@@ -77,6 +77,9 @@ public class TriangleDAO extends DAO<Triangle> {
 			}
 			else {
 				sql = this.conn.prepareStatement("DELETE FROM Triangle WHERE nom = ?");
+				sql.setString(1,nom);
+				sql.executeUpdate();
+				sql = this.conn.prepareStatement("DELETE FROM allForme WHERE nomForme = ?");
 				sql.setString(1,nom);
 				sql.executeUpdate();
 			}
