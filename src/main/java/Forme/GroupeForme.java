@@ -14,9 +14,18 @@ public class GroupeForme implements Forme {
 	public void add (Forme f) {
 		listForme.add(f);
 	}
-	public void delete (Forme f) {
-		listForme.remove(listForme.indexOf(f));
+	public void delete (String nom) {
+		Iterator<Forme> itr = listForme.iterator();
+		Forme f = null;
+		while (itr.hasNext()) {
+			f = itr.next();
+			if(f.getNom().equals(nom)) {
+				this.listForme.remove(this.listForme.indexOf(f));
+				return;
+			}				
+		}
 	}
+	
 	public String toString() {
 		String str = nom+ " (\n\n\t";
 		Iterator<Forme> itr = listForme.iterator();
