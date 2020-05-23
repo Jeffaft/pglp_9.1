@@ -31,4 +31,10 @@ public class Triangle implements Forme {
 	public Point getC() {
 		return C;
 	}
+	@Override
+	public void moove(int x, int y) {
+		this.A.moovePoint(x, y);
+		this.B.moovePoint(x, y);
+		this.C.moovePoint(x, y);
+	}
 }

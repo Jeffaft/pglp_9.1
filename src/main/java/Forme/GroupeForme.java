@@ -44,4 +44,22 @@ public class GroupeForme implements Forme {
 		return false;
 	}
 	
+	@Override
+	public void moove(int x, int y) {
+		Iterator<Forme> itr = listForme.iterator();
+		while (itr.hasNext()) {
+			itr.next().moove(x, y);
+		}
+	}
+	public Forme getForme(String nom) {
+		Iterator<Forme> itr = listForme.iterator();
+		Forme f = null;
+		while (itr.hasNext()) {
+			f = itr.next();
+			if(f.getNom().equals(nom))
+					return f;
+		}
+		return f;
+	}
+	
 }

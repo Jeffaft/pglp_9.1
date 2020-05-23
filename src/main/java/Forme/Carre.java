@@ -31,4 +31,8 @@ public class Carre implements Forme {
 	public String getNom() {
 		return this.nom;
 	}
+	@Override
+	public void moove(int x,int y) {
+		this.bas_gauche.moovePoint(x, y);
+	}
 }

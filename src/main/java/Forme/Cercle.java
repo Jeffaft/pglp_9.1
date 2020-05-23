@@ -26,4 +26,9 @@ public class Cercle implements Forme {
 	public int getRayon() {
 		return rayon;
 	}
+	
+	@Override
+	public void moove(int x, int y) {
+		this.centre.moovePoint(x, y);
+	}
 }

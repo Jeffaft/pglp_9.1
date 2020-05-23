@@ -27,5 +27,9 @@ public class Rectangle implements Forme {
 	}
 	public Point getBas_gauche() {
 		return bas_gauche;
-	}	
+	}
+	@Override
+	public void moove(int x, int y) {
+		this.bas_gauche.moovePoint(x, y);
+	}
 }
