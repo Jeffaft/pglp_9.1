@@ -1,8 +1,8 @@
 package ExceptionPers;
 
-public class CommandeInconnueException extends Exception{
+public class CommandeInconnueException extends ExceptionPers{
 	public CommandeInconnueException() {
-		System.out.println("Commande inconnue, veuillez vous referrez au manuel pour savoir les commandes autorisees;");
+		super ("Commande inconnue, veuillez vous referrez au manuel pour savoir les commandes autorisees.");
 	}
 	
 }

@@ -14,7 +14,9 @@ public class GroupeForme implements Forme {
 	public void add (Forme f) {
 		listForme.add(f);
 	}
-	
+	public void delete (Forme f) {
+		listForme.remove(listForme.indexOf(f));
+	}
 	public String toString() {
 		String str = nom+ " (\n\n\t";
 		Iterator<Forme> itr = listForme.iterator();
@@ -28,9 +30,18 @@ public class GroupeForme implements Forme {
 	public String getNom() {
 		return nom;
 	}
-
+	
 	public Iterator<Forme> getListIteraror() {
 		return listForme.iterator();
+	}
+	
+	public boolean contain(String nom) {
+		Iterator<Forme> itr = listForme.iterator();
+		while (itr.hasNext()) {
+			if(itr.next().getNom().equals(nom))
+					return true;
+		}
+		return false;
 	}
 	
 }
