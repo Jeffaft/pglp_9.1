@@ -33,7 +33,7 @@
 		          <descriptorRefs>
 		            <descriptorRef>jar-with-dependencies</descriptorRef>
 		          </descriptorRefs>
-		          <finalName>pglp_9.9</finalName>
+		          <finalName>pglp_9.9_REYNAUD</finalName>
 		          <appendAssemblyId>true</appendAssemblyId>
 		          <archive>
 		            <manifest>
