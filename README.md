@@ -150,6 +150,20 @@ Les commande **exit** et **help** permmettent de quitter le programme et de voir
 
 
 
-##Description technique
+# MANUEL TECHNIQUEe
+## Session
+Un objet de la classe **GroupeForme** est instancié au début du programme, il sert à stocker les objets métier de la session en cours.
 
-Un objet GroupeForme est instancié au début du programme, il sert à stocker les objets métier de la session en cours.
+## Gestions des erreurs
+Des vérifications sont faites pour éviter l'arrêt du programme dans un cas non géré.
+Le package ExceptionPers contient les exceptions créées pour gérer ces cas
+
+Vérifications:
+- syntaxe des commandes correctes
+- nombre d'arguments pour chaque type de commande
+- syntaxe des points rentrés
+- vérification des entier
+- objet déjà dessiné/pas dessiné
+- objet déjà sauvegardé/pas sauvegardé/introuvable
+s
+
