@@ -66,4 +66,57 @@ public class FormeTest {
 				+ "Cercle (c1, (6,2), 3)\n\tTriangle (t1, (6,2), (8,4), (5,5))\n\t\n)");
 		
 	}
+	
+	@Test
+	public void testContainTrueGroupe() {
+		GroupeForme gp = new GroupeForme("test");
+		
+		Point p2 = new Point (0,0);
+		Rectangle r = new Rectangle("r1",p2,5,10);
+		
+		gp.add(r);
+		assertEquals(gp.contain("r1"),true);
+	}
+	@Test
+	public void testContainFalseGroupe() {
+		GroupeForme gp = new GroupeForme("test");
+		
+		Point p2 = new Point (0,0);
+		Rectangle r = new Rectangle("r1",p2,5,10);
+		
+		gp.add(r);
+		assertEquals(gp.contain("rmauvais"),false);
+	}
+	
+	@Test 
+	public void testGetFormeGroupe() {
+		GroupeForme gp = new GroupeForme("test");
+		
+		Point p2 = new Point (0,0);
+		Rectangle r = new Rectangle("r1",p2,5,10);
+		
+		Point p3 = new Point (0,0);
+		Rectangle r2 = new Rectangle("r1",p2,5,10);
+		
+		Point p4 = new Point (0,0);
+		Rectangle r4 = new Rectangle("r5",p2,5,10);
+		
+		gp.add(r);
+		
+		assertEquals(gp.getForme("r1").toString(),r2.toString());
+		assertNotEquals(gp.getForme("r1").toString(),r4.toString());
+		
+	}
+	
+	@Test 
+	public void testDeleteGroupeForme() {
+		GroupeForme gp = new GroupeForme("test");
+		
+		Point p2 = new Point (0,0);
+		Rectangle r = new Rectangle("r1",p2,5,10);
+		
+		gp.add(r);
+		gp.delete("r1");
+		assertEquals(gp.getForme("r1"),null);
+	}
 }
