@@ -5,6 +5,7 @@ import DAO.DataBase;
 import DAO.FabriqueDAO;
 import ExceptionPers.CommandeIncorrecteException;
 import ExceptionPers.ExceptionPers;
+import ExceptionPers.InexistantException;
 import ExceptionPers.ObjetInexistant;
 import Forme.*;
 import Forme.Carre;
@@ -14,13 +15,13 @@ public class CommandDelete implements Command{
 	public void execute(String commande,GroupeForme session,String dbname)
 		throws ExceptionPers{
 		String[] str = commande.split(" ");
-		//si trop peu d'arguments
+		//verif nombre d'arguments
 		if (str.length!=2) {
 			throw new CommandeIncorrecteException("Vous ne pouvez supprimer qu'une figure à la fois.");
 		}
 		String type = DataBase.findType(str[1], dbname);
 		if (type.equals("")) {
-			throw new ObjetInexistant(str[1]);
+			throw new InexistantException(str[1]);
 		}
 		else if (type.equals("carre")) {
 			DAO<Carre> dao = FabriqueDAO.getCarreDAO(dbname);
