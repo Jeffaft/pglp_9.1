@@ -20,7 +20,6 @@ public class CarreDAO extends DAO<Carre> {
 	}
 	public void disconnect() {
 		try {
-			System.out.println("disconnecting");
 			this.conn.close();
 		} catch (SQLException e) 
 		{ 
@@ -37,7 +36,7 @@ public class CarreDAO extends DAO<Carre> {
 				ResultSet results = sql.getResultSet();
 			if(results.next()) {
 				this.disconnect();
-				throw new ExistantException();
+				throw new ExistantException(c.getNom());
 			}
 			else {
 				sql = this.conn.prepareStatement("INSERT INTO Carre(nom,x ,y, longueur) VALUES(?,?,?,?)");
@@ -68,7 +67,7 @@ public class CarreDAO extends DAO<Carre> {
 			ResultSet results = sql.getResultSet();
 			if(!results.next()) {
 				this.disconnect();
-				throw new InexistantException();
+				throw new InexistantException(nom);
 			}
 			else {
 				sql = this.conn.prepareStatement("DELETE FROM Carre WHERE nom = ?");
@@ -100,7 +99,7 @@ public class CarreDAO extends DAO<Carre> {
 			}
 			else {
 				this.disconnect();
-				throw new InexistantException();
+				throw new InexistantException(nom);
 			}
 			
 		} catch (SQLException e) {
@@ -112,5 +111,39 @@ public class CarreDAO extends DAO<Carre> {
 		
 		return result;
 	}
+	
+	public void update(Carre c) throws ExceptionPers {
+		this.connect();
+		Carre test = null;
+		try {
+			//on vérifie qu'il eexiste bien
+			PreparedStatement sql =
+					this.conn.prepareStatement("SELECT * FROM Carre WHERE nom = ?");
+			sql.setString(1,c.getNom());
+			sql.execute();
+			ResultSet results = sql.getResultSet();
+			if (results.next()){
+				sql = this.conn.prepareStatement("UPDATE Carre set x = ?, y = ?, longueur = ? WHERE nom = ?");
+				sql.setInt(1,c.getBas_gauche().getX());
+				sql.setInt(2,c.getBas_gauche().getX());
+				sql.setInt(3,c.getL());
+				sql.setString(4,c.getNom());
+				sql.executeUpdate();
+			}
+			//si il n'est pas déjà sauvegardé, on ne peut pas l'update ==> on le crée
+			else {
+				this.disconnect();
+				this.create(c);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		this.disconnect();
+			
+	
+	}
+	
+	
 	
 }

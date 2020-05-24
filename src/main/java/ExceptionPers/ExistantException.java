@@ -1,7 +1,7 @@
 package ExceptionPers;
 
-public class ExistantException extends Exception {
-	public ExistantException(){
-	    System.out.println("Objet Déjà existant");
+public class ExistantException extends ExceptionPers {
+	public ExistantException(String obj){
+	    super(obj +" :Objet Déjà existant");
 	  }  
 }

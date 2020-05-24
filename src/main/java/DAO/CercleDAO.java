@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import ExceptionPers.ExceptionPers;
 import ExceptionPers.ExistantException;
 import ExceptionPers.InexistantException;
 
@@ -22,7 +23,6 @@ public class CercleDAO extends DAO<Cercle>{
 	}
 	public void disconnect() {
 		try {
-			System.out.println("disconnecting");
 			this.conn.close();
 		} catch (SQLException e) 
 		{ 
@@ -39,7 +39,7 @@ public class CercleDAO extends DAO<Cercle>{
 				ResultSet results = sql.getResultSet();
 			if(results.next()) {
 				this.disconnect();
-				throw new ExistantException();
+				throw new ExistantException(c.getNom());
 			}
 			else {
 				sql = this.conn.prepareStatement("INSERT INTO Cercle(nom,x ,y,rayon) VALUES(?,?,?,?)");
@@ -70,7 +70,7 @@ public class CercleDAO extends DAO<Cercle>{
 			ResultSet results = sql.getResultSet();
 			if(!results.next()) {
 				this.disconnect();
-				throw new InexistantException();
+				throw new InexistantException(nom);
 			}
 			else {
 				sql = this.conn.prepareStatement("DELETE FROM Cercle WHERE nom = ?");
@@ -102,7 +102,7 @@ public class CercleDAO extends DAO<Cercle>{
 			}
 			else {
 				this.disconnect();
-				throw new InexistantException();
+				throw new InexistantException(nom);
 			}
 			
 		} catch (SQLException e) {
@@ -114,4 +114,35 @@ public class CercleDAO extends DAO<Cercle>{
 		
 		return result;
 	}
+	
+	public void update(Cercle c) throws ExceptionPers {
+		this.connect();
+		Cercle result = null;
+		try {
+			PreparedStatement sql =
+					this.conn.prepareStatement("SELECT * FROM Cercle WHERE nom = ?");
+			sql.setString(1,c.getNom());
+			sql.execute();
+				ResultSet results = sql.getResultSet();
+			if(results.next()) {
+				sql = this.conn.prepareStatement("UPDATE Cercle set x = ?, y = ?, rayon = ? WHERE nom = ?");
+				sql.setInt(1,c.getCentre().getX());
+				sql.setInt(2,c.getCentre().getY());
+				sql.setInt(3,c.getRayon());
+				sql.setString(4,c.getNom());
+				sql.executeUpdate();
+			}
+			else {
+				this.disconnect();
+				this.create(c);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		this.disconnect();
+			
+	}
+	
+	
 }

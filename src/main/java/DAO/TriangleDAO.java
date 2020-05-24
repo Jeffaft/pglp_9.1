@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import ExceptionPers.ExceptionPers;
 import ExceptionPers.ExistantException;
 import ExceptionPers.InexistantException;
 
@@ -22,7 +23,6 @@ public class TriangleDAO extends DAO<Triangle> {
 	}
 	public void disconnect() {
 		try {
-			System.out.println("disconnecting");
 			this.conn.close();
 		} catch (SQLException e) 
 		{ 
@@ -39,7 +39,7 @@ public class TriangleDAO extends DAO<Triangle> {
 				ResultSet results = sql.getResultSet();
 			if(results.next()) {
 				this.disconnect();
-				throw new ExistantException();
+				throw new ExistantException(t.getNom());
 			}
 			else {
 				sql = this.conn.prepareStatement("INSERT INTO Triangle(nom,xA,yA,xB,yB,xC,yC) VALUES(?,?,?,?,?,?,?)");
@@ -73,7 +73,7 @@ public class TriangleDAO extends DAO<Triangle> {
 			ResultSet results = sql.getResultSet();
 			if(!results.next()) {
 				this.disconnect();
-				throw new InexistantException();
+				throw new InexistantException(nom);
 			}
 			else {
 				sql = this.conn.prepareStatement("DELETE FROM Triangle WHERE nom = ?");
@@ -107,7 +107,7 @@ public class TriangleDAO extends DAO<Triangle> {
 			}
 			else {
 				this.disconnect();
-				throw new InexistantException();
+				throw new InexistantException(nom);
 			}
 			
 		} catch (SQLException e) {
@@ -118,5 +118,41 @@ public class TriangleDAO extends DAO<Triangle> {
 	
 		
 		return result;
+	}
+	
+	public void update(Triangle t) throws ExceptionPers {
+		this.connect();
+		Triangle result = null;
+		try {
+			PreparedStatement sql =
+					this.conn.prepareStatement("SELECT * FROM Triangle WHERE nom = ?");
+			sql.setString(1,t.getNom());
+			sql.execute();
+				ResultSet results = sql.getResultSet();
+			if(results.next()) {
+				sql = this.conn.prepareStatement("UPDATE Triangle"
+						+ " set xA = ?, yA = ?,"
+						+ " xB = ?, yB =?,"
+						+ " xC = ?, yC = ?,"
+						+ " WHERE nom = ?");
+				sql.setInt(1,t.getA().getX());
+				sql.setInt(2,t.getA().getY());
+				sql.setInt(3,t.getB().getX());
+				sql.setInt(4,t.getB().getY());
+				sql.setInt(5,t.getC().getX());
+				sql.setInt(5,t.getC().getY());
+				sql.setString(5,t.getNom());
+				sql.executeUpdate();
+			}
+			else {
+				this.disconnect();
+				this.create(t);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		this.disconnect();
+
 	}
 }

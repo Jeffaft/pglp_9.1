@@ -1,3 +1,4 @@
+package Drawing;
 import ExceptionPers.CommandeInconnueException;
 import Command.*;
 public class DrawingTUI {
@@ -21,9 +22,19 @@ public class DrawingTUI {
 		else if (commande[0].equals("exit")) {
 			return new CommandExit();
 		}
+		else if (commande[0].equals("initBD")) {
+			return new CommandInitBD();
+		}
+		else if (commande[0].equals("deleteBD")) {
+			return new CommandDeleteBD();
+		}
 		else {
 			throw new CommandeInconnueException();
 		}
 		
+	}
+	
+	public static void afficheResultat(String result) {
+		System.out.println(result);
 	}
 }

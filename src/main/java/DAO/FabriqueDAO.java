@@ -1,6 +1,7 @@
 package DAO;
 import Forme.*;
 public class FabriqueDAO {	
+
 	public static DAO<Carre> getCarreDAO(String dbName){
 		return new CarreDAO(dbName);
 	}

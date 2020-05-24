@@ -1,8 +1,8 @@
 package ExceptionPers;
 
-public class InexistantException extends Exception {
-		  public InexistantException(){
-		    System.out.println("Objet inexistant/ non sauvegardé.");
+public class InexistantException extends ExceptionPers {
+		  public InexistantException(String nom){
+		   super(nom +" :Objet inexistant/ non sauvegardé.");
 		  }  
 		
 }

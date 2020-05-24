@@ -1,3 +1,4 @@
+package Drawing;
 import ExceptionPers.CommandeInconnueException;
 import ExceptionPers.CommandeIncorrecteException;
 import ExceptionPers.ExceptionPers;
@@ -24,7 +25,7 @@ public class DrawingApp {
 	}
 	public static void main(final String[] args) throws ExceptionPers {
 		GroupeForme session = new GroupeForme("sessionActuelle");
-		DrawingApp.run(session,"DessinBDD");
+		DrawingApp.run(session,"DessinDataBase7");
 	}
 
 }

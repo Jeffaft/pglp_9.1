@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import ExceptionPers.ExceptionPers;
 import ExceptionPers.ExistantException;
 import ExceptionPers.InexistantException;
 
@@ -21,7 +22,6 @@ public class RectangleDAO extends DAO<Rectangle> {
 	}
 	public void disconnect() {
 		try {
-			System.out.println("disconnecting");
 			this.conn.close();
 		} catch (SQLException e) 
 		{ 
@@ -38,7 +38,7 @@ public class RectangleDAO extends DAO<Rectangle> {
 				ResultSet results = sql.getResultSet();
 			if(results.next()) {
 				this.disconnect();
-				throw new ExistantException();
+				throw new ExistantException(r.getNom());
 			}
 			else {
 				sql = this.conn.prepareStatement("INSERT INTO Rectangle(nom,x ,y,hauteur, longueur) VALUES(?,?,?,?,?)");
@@ -70,7 +70,7 @@ public class RectangleDAO extends DAO<Rectangle> {
 			ResultSet results = sql.getResultSet();
 			if(!results.next()) {
 				this.disconnect();
-				throw new InexistantException();
+				throw new InexistantException(nom);
 			}
 			else {
 				sql = this.conn.prepareStatement("DELETE FROM Rectangle WHERE nom = ?");
@@ -102,7 +102,7 @@ public class RectangleDAO extends DAO<Rectangle> {
 			}
 			else {
 				this.disconnect();
-				throw new InexistantException();
+				throw new InexistantException(nom);
 			}
 			
 		} catch (SQLException e) {
@@ -115,5 +115,34 @@ public class RectangleDAO extends DAO<Rectangle> {
 		return result;
 	}
 	
+	public void update(Rectangle r) throws ExceptionPers {
+		this.connect();
+		Rectangle result = null;
+		try {
+			PreparedStatement sql =
+					this.conn.prepareStatement("SELECT * FROM Rectangle WHERE nom = ?");
+			sql.setString(1,r.getNom());
+			sql.execute();
+				ResultSet results = sql.getResultSet();
+			if(results.next()) {
+				sql = this.conn.prepareStatement("UPDATE Rectangle set x = ?, y = ?, hauteur = ? longueur = ? WHERE nom = ?");
+				sql.setInt(1,r.getBas_gauche().getX());
+				sql.setInt(2,r.getBas_gauche().getX());
+				sql.setInt(3,r.getHauteur());
+				sql.setInt(4,r.getLongueur());
+				sql.setString(5,r.getNom());
+				sql.executeUpdate();
+			}
+			else {
+				this.disconnect();
+				this.create(r);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		this.disconnect();
+
+	}
 	
 }

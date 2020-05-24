@@ -11,7 +11,7 @@ public abstract class DataBase {
 		Connection conn = null;
 		try {
 			conn = DriverManager.getConnection("jdbc:derby:"+dbName+";create=true");
-		}  catch (SQLException e) {
+		}  catch (Exception e) {
             e.printStackTrace();
         }
 		
@@ -181,6 +181,12 @@ public abstract class DataBase {
 		{ 
 			e.printStackTrace();
 		}
+		return str;
+	}
+	
+	public static String recapBDD(String dbName) {
+		String str = "****RECAP DESSINS SAUVEGARDES****\n";
+		str += afficheTable("allForme", dbName);
 		return str;
 	}
 }

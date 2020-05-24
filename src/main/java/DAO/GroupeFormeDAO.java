@@ -20,14 +20,12 @@ public class GroupeFormeDAO extends DAO<GroupeForme>{
 		recDAO = FabriqueDAO.getRectangleDAO(dbName);
 		cerDAO = FabriqueDAO.getCercleDAO(dbName);
 		triDAO = FabriqueDAO.getTriangleDAO(dbName);
-		System.out.println("NOT HERE");
 	}
 	public void connect() {
 		this.conn = DataBase.connect(dbName);
 	}
 	public void disconnect() {
 		try {
-			System.out.println("disconnecting");
 			this.conn.close();
 		} catch (SQLException e) 
 		{ 
@@ -44,7 +42,7 @@ public class GroupeFormeDAO extends DAO<GroupeForme>{
 				ResultSet results = sql.getResultSet();
 			if(results.next()) {
 				this.disconnect();
-				throw new ExistantException();
+				throw new ExistantException(gp.getNom());
 			}
 			else {
 				//insertion dans la table allForme
@@ -57,7 +55,6 @@ public class GroupeFormeDAO extends DAO<GroupeForme>{
 				Forme f = null;
 				int order = 0;
 				while (itr.hasNext()) {
-					System.out.println("---BOUCLE ITR");
 					f = itr.next();
 					
 					if (f instanceof Carre) {
@@ -138,7 +135,7 @@ public class GroupeFormeDAO extends DAO<GroupeForme>{
 			}
 			else {
 				this.disconnect();
-				throw new InexistantException();
+				throw new InexistantException(nomGroupe);
 			}
 			
 		} catch (SQLException e) {
@@ -196,7 +193,7 @@ public class GroupeFormeDAO extends DAO<GroupeForme>{
 			}
 			else {
 				this.disconnect();
-				throw new InexistantException();
+				throw new InexistantException(nomGroupe);
 			}
 			
 		} catch (SQLException e) {
@@ -205,5 +202,30 @@ public class GroupeFormeDAO extends DAO<GroupeForme>{
 		this.disconnect();
 		
 	}
+	
+	public void update(GroupeForme gp) throws ExceptionPers {
+		this.connect();
+		try {
+			PreparedStatement sql =
+					this.conn.prepareStatement("SELECT * FROM Groupe WHERE nomGroupe = ? ORDER by ordreF");
+			sql.setString(1,gp.getNom());
+			sql.execute();
+				ResultSet results = sql.getResultSet();		
+			if(results.next()) {
+				this.disconnect();
+				this.delete(gp.getNom());
+				this.create(gp);
+			}
+			else {
+				this.disconnect();
+				this.create(gp);;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		this.disconnect();
+	}
+	
 	
 }
