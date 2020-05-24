@@ -2,8 +2,8 @@
 - Exercice réalisé pour le module PGLP, M1 INFORMATIQUE
 - Julien Reynaud
 
-##MANUEL UTILISATEUR
-###Installation du programme :
+## MANUEL UTILISATEUR
+### Installation du programme :
 ```shell
 # Installer :
 mvn install
@@ -14,9 +14,9 @@ mvn site
 # Exécuter le programme :
 java -jar target\pglp_9.9_REYNAUD-jar-with-dependencies.jar
 ```
-###Utilisation du programme
-##Initialisation de la BD
-- **/!\IMPORTANT/!\**
+### Utilisation du programme
+## Initialisation de la BD
+- ** /!\IMPORTANT/!\ **
 Pour la première utilisation du programme, il faut impérativement initialiser la BD avec:
 ```shell
 initBD
