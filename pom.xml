@@ -14,7 +14,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
-    <jar.finalName>pglp_5.2</jar.finalName>
+    <jar.finalName>pglp_9.9</jar.finalName>
   </properties>
 
 	<build>
@@ -28,18 +28,29 @@
 				<version>2.22.1</version>
 			</plugin>
 			<plugin>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.0.2</version>
-				<configuration>
-        			<archive>
-	          			<manifest>
-	            			<addClasspath>true</addClasspath>
-	            			<classpathPrefix>lib/</classpathPrefix>
-	            			<mainClass></mainClass>
-	         			 </manifest>
-        			</archive>
-      			</configuration>
-			</plugin>
+		        <artifactId>maven-assembly-plugin</artifactId>
+		        <configuration>
+		          <descriptorRefs>
+		            <descriptorRef>jar-with-dependencies</descriptorRef>
+		          </descriptorRefs>
+		          <finalName>pglp_9.9</finalName>
+		          <appendAssemblyId>true</appendAssemblyId>
+		          <archive>
+		            <manifest>
+		              <mainClass>Drawing.DrawingApp</mainClass>
+		            </manifest>
+		          </archive>
+		        </configuration>
+		        <executions>
+		          <execution>
+		            <id>make-assembly</id>
+		            <phase>package</phase>
+		            <goals>
+		              <goal>single</goal>
+		            </goals>
+		          </execution>
+		        </executions>
+		      </plugin>
 			<plugin>
 				<artifactId>maven-install-plugin</artifactId>
 				<version>2.5.2</version>

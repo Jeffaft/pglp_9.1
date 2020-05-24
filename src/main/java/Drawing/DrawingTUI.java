@@ -37,6 +37,9 @@ public class DrawingTUI {
 		else if (commande[0].equals("load")) {
 			return new CommandLoad();
 		}
+		else if (commande[0].equals("help")) {
+			return new CommandHelp();
+		}
 		else {
 			throw new CommandeInconnueException();
 		}
