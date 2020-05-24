@@ -189,6 +189,28 @@ public abstract class DataBase {
 		str += afficheTable("allForme", dbName);
 		return str;
 	}
+	
+	public static String findType (String nom,String dbName) {
+		String result = null;
+		Connection conn = DataBase.connect(dbName);
+		try {
+			PreparedStatement sql = conn.prepareStatement("SELECT * FROM allForme WHERE NomForme = ? ");
+			sql.setString(1, nom);
+			sql.execute();	
+			ResultSet results = sql.getResultSet();
+			if(results.next()) {
+				result = results.getString("type");
+				conn.close();
+				return  result;
+			}
+			conn.close();
+		} catch (Exception e) 
+		{ 
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
 
 

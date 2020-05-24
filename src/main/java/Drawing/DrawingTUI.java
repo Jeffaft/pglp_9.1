@@ -31,6 +31,9 @@ public class DrawingTUI {
 		else if (commande[0].equals("recap")) {
 			return new CommandRecap();
 		}
+		else if (commande[0].equals("delete")) {
+			return new CommandDelete();
+		}
 		else {
 			throw new CommandeInconnueException();
 		}

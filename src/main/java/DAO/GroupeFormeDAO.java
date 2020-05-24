@@ -107,7 +107,6 @@ public class GroupeFormeDAO extends DAO<GroupeForme>{
 				result = new GroupeForme(nomGroupe);
 				do {
 				
-					System.out.println("FORME : "+results.getString("NomForme"));
 					sql2 = this.conn.prepareStatement("SELECT * FROM allForme WHERE NomForme = ?");
 					sql2.setString(1,results.getString("NomForme"));
 					sql2.execute();
@@ -162,8 +161,7 @@ public class GroupeFormeDAO extends DAO<GroupeForme>{
 					sql2.setString(1,results.getString("NomForme"));
 					sql2.execute();
 					ResultSet results2 = sql2.getResultSet();
-					results2.next();
-					System.out.println("TYPE : "+ results2.getString("type"));
+					results2.next();					
 					if (results2.getString("type").equals("carre")) {
 						carrDAO.delete(results.getString("NomForme"));
 					}
