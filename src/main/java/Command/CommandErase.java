@@ -5,7 +5,7 @@ import ExceptionPers.ExceptionPers;
 import ExceptionPers.ObjetInexistant;
 import Forme.GroupeForme;
 
-public class CommandDelete implements Command{
+public class CommandErase implements Command{
 	//delete nom
 	public void execute(String commande, GroupeForme session, String dbname ) 
 		throws ExceptionPers

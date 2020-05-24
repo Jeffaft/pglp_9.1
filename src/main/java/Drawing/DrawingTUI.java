@@ -13,8 +13,8 @@ public class DrawingTUI {
 		else if (commande[0].equals("moove")) {
 			return new CommandMoove();
 		}
-		else if (commande[0].equals("delete")) {
-			return new CommandDelete();
+		else if (commande[0].equals("erase")) {
+			return new CommandErase();
 		}
 		else if (commande[0].equals("save")) {
 			return new CommandSave();
@@ -27,6 +27,9 @@ public class DrawingTUI {
 		}
 		else if (commande[0].equals("deleteBD")) {
 			return new CommandDeleteBD();
+		}
+		else if (commande[0].equals("recap")) {
+			return new CommandRecap();
 		}
 		else {
 			throw new CommandeInconnueException();
