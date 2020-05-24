@@ -2,6 +2,26 @@
 - Exercice réalisé pour le module PGLP, M1 INFORMATIQUE
 - Julien Reynaud
 
+# Description général
+Le programme contient les fonctionnalités suivantes :
+- Dessin de formes (Carré, Rectangle, Triangle, Cercle)
+- Groupements de formes ou de groupes de formes
+- Déplacement de formes 
+- Déplacement de groupes de formes
+- Effacement de formes ou groupes du dessin actuel
+- Sauvegarde/Chargement de formes ou de groupes dans la BD
+- Modification de formes dans la BD
+- Suppression de formes dans la BD
+
+Au niveau implémentation :
+
+- Pattern composite pour les groupes de formes
+- Pattern DAO pour la BD
+- Pattern Command pour l'exécution des commandes
+- Gestion des erreurs avec les exceptions personnalisées
+
+Voir le manuel utilisateur et le manuel technique pour le fonctionnement.
+
 # MANUEL UTILISATEUR
 ## Installation du programme :
 ```shell
@@ -30,7 +50,7 @@ deleteBD
 ```
 ### Commandes
 
-#### Dessiner des formes :
+- #### Dessiner des formes :
 Le dessin se fait avec la commannde **draw**. Les points se renseigne sous la forme (x,y).
 
 ``` shell
@@ -55,7 +75,7 @@ draw triangle T1 (55,-2) 6
 exit
 ```
 
-#### Grouper des formes ou groupes de formes
+- #### Grouper des formes ou groupes de formes
 La commande **group nomGroupe forme1 forme2 group1 form6...** offre la possibilité de grouper des formes dessinées.
 Il est possible de **grouper des groupes déjà formés**. 
 
@@ -68,14 +88,14 @@ draw triangle t (x,y) (x,y) (x,y)
 group SecondGroup FirstGroup t
 
 exit
-```### Déplacer des dessins
+```- ### Déplacer des dessins
 **moove nomDessin abscisse ordonnée** permet de déplacer un dessin ou groupe de dessin dans une direction x et y.
 
 ```shell
 moove group2 5 -3
 ```
 
-### Effacer des dessins de la session actuelle
+- ### Effacer des dessins de la session actuelle
 **erase nomDessin** permet d'effacer des formes dessinées dans la session actuelle. Les groupes de dessins peuvent aussi être effacés
 
 ```shell
@@ -84,15 +104,51 @@ erase carretest
 exit
 ```
 
-draw cercle nom (.,.) rayon
-draw carre nom (x,y) taille
-draw rectangle nom (x,y) hauteur longueur
-group nom figure1 figure2 .. ..
-moove
-save 
-possibilité de save plusieurs en meme temps
-delete
+- ### Sauvegarder des dessins dans la base de données
+Si la base de données a bien été initialisé la commande **save nomDessin** peut être utilisée. Si des modifications on été apporté
+au dessin (délacement) elles seront sauvegardées.
+
+```shell
+draw carre carretest (4,5) 55
+save carretest
+
+draw triangle T (4,5) 2
+draw rectangle rec (5,0) 2
+group newGroupe T rec 
+save newGroupe
 exit
+```
+
+- ### Voir les dessins de la base de données
+La commande **recap** permet de voir une récapitulatif des dessins sauvegardés.
+
+
+- ### Charger des dessins depuis la base de données
+**load nomDessin**
+
+```shell
+# dessin avec sauvegarde 
+draw carre carretest (4,5) 55
+save carretest
+exit
+
+# chargement du dessin
+load carretest
+exit
+```
+
+- ### Effacer des dessins de la base de données
+**delete nomDessin** à condition que le dessin est sauvegardé.
+
+```shell
+delete carretest
+exit
+```
+
+- ### Exit et Help
+Les commande **exit** et **help** permmettent de quitter le programme et de voir un récapitulatif des commandes.
+
+
 
 ##Description technique
 
