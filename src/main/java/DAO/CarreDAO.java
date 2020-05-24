@@ -125,7 +125,7 @@ public class CarreDAO extends DAO<Carre> {
 			if (results.next()){
 				sql = this.conn.prepareStatement("UPDATE Carre set x = ?, y = ?, longueur = ? WHERE nom = ?");
 				sql.setInt(1,c.getBas_gauche().getX());
-				sql.setInt(2,c.getBas_gauche().getX());
+				sql.setInt(2,c.getBas_gauche().getY());
 				sql.setInt(3,c.getL());
 				sql.setString(4,c.getNom());
 				sql.executeUpdate();

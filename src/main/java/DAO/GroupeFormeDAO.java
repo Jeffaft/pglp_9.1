@@ -112,7 +112,6 @@ public class GroupeFormeDAO extends DAO<GroupeForme>{
 					sql2.execute();
 					ResultSet results2 = sql2.getResultSet();
 					results2.next();
-					System.out.println("TYPE : "+ results2.getString("type"));
 					if (results2.getString("type").equals("carre")) {
 						result.add(carrDAO.find(results.getString("NomForme")));
 					}

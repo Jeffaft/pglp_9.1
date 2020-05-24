@@ -191,7 +191,7 @@ public abstract class DataBase {
 	}
 	
 	public static String findType (String nom,String dbName) {
-		String result = null;
+		String result = "";
 		Connection conn = DataBase.connect(dbName);
 		try {
 			PreparedStatement sql = conn.prepareStatement("SELECT * FROM allForme WHERE NomForme = ? ");

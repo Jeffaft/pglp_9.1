@@ -25,7 +25,7 @@ public class DrawingApp {
 	}
 	public static void main(final String[] args) throws ExceptionPers {
 		GroupeForme session = new GroupeForme("sessionActuelle");
-		DrawingApp.run(session,"DessinDataBase10");
+		DrawingApp.run(session,"DessinDataBase13");
 	}
 
 }
