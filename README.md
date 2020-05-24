@@ -16,7 +16,7 @@ java -jar target\pglp_9.9_REYNAUD-jar-with-dependencies.jar
 ```
 ### Utilisation du programme
 ## Initialisation de la BD
-- ** /!\IMPORTANT/!\ **
+- ## IMPORTANT
 Pour la première utilisation du programme, il faut impérativement initialiser la BD avec:
 ```shell
 initBD
